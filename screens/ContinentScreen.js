@@ -1,9 +1,16 @@
-import { StyleSheet, Text, View, Button, Dimensions, ScrollView, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Button, Dimensions, ScrollView, Pressable, Image } from 'react-native'
 import React from 'react'
 import Colors from '../constants/Colors'
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
+
+import NorthAmerica from '../assets/img/North-America.png'
+import Africa from '../assets/img/Africa.png'
+import Asia from '../assets/img/Asia.png'
+import SouthAmerica from '../assets/img/South-America.png'
+import Europe from '../assets/img/Europe.png'
+import Australia from '../assets/img/Australia.png'
 
 const ContinentScreen = ({ navigation }) => {
   return (
@@ -15,7 +22,7 @@ const ContinentScreen = ({ navigation }) => {
             android_ripple={{ color: Colors.secondary_gold}}
             onPress={() => navigation.push('Country Pick')}
         >
-            <Text>North America</Text>
+            <Image source={NorthAmerica} style={styles.thumbnailImage} resizeMode='contain'/>
         </Pressable>
 
         <Pressable 
@@ -23,7 +30,7 @@ const ContinentScreen = ({ navigation }) => {
             android_ripple={{ color: Colors.secondary_gold}}
             onPress={() => navigation.push('Country Pick')}
         >
-            <Text>Asia</Text>
+            <Image source={Africa} style={styles.thumbnailImage} resizeMode='contain'/>
         </Pressable>
 
         <Pressable 
@@ -31,7 +38,7 @@ const ContinentScreen = ({ navigation }) => {
             android_ripple={{ color: Colors.secondary_gold}}
             onPress={() => navigation.push('Country Pick')}
         >
-            <Text>Africa</Text>
+            <Image source={Asia} style={styles.thumbnailImage} resizeMode='contain'/>
         </Pressable>
 
         <Pressable 
@@ -39,7 +46,7 @@ const ContinentScreen = ({ navigation }) => {
             android_ripple={{ color: Colors.secondary_gold}}
             onPress={() => navigation.push('Country Pick')}
         >
-            <Text>North America</Text>
+            <Image source={SouthAmerica} style={styles.thumbnailImage} resizeMode='contain'/>
         </Pressable>
 
         <Pressable 
@@ -47,7 +54,7 @@ const ContinentScreen = ({ navigation }) => {
             android_ripple={{ color: Colors.secondary_gold}}
             onPress={() => navigation.push('Country Pick')}
         >
-            <Text>Asia</Text>
+            <Image source={Europe} style={styles.thumbnailImage} resizeMode='contain'/>
         </Pressable>
 
         <Pressable 
@@ -55,7 +62,7 @@ const ContinentScreen = ({ navigation }) => {
             android_ripple={{ color: Colors.secondary_gold}}
             onPress={() => navigation.push('Country Pick')}
         >
-            <Text>Africa</Text>
+            <Image source={Australia} style={styles.thumbnailImage} resizeMode='contain'/>
         </Pressable>
 
       </ScrollView>  
@@ -76,16 +83,24 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        alignItems: 'center',
         justifyContent: 'center'
     },
     continentContainer: {
-        width: windowWidth / 2 - 50,
-        height: windowWidth / 2 - 40,
-        borderWidth: 1,
-        borderColor: Colors.primary_gold,
+        width: windowWidth / 2 - 25,
+        height: windowHeight / 3 - 62,
+        // borderWidth: 1,
+        // borderColor: Colors.primary_gold,
         marginHorizontal: 10,
         marginVertical: 10,
-        borderRadius: 5
-    }
+        borderRadius: 10,
+        backgroundColor: "#FEFCEE",
+        alignItems: 'center',
+        justifyContent: "center",
+        shadowColor: '#000',
+        shadowOffset: {width: 1, height: 3},
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        elevation: 10
+    },
+    thumbnailImage: {width: '90%',height: '92%'}
 })

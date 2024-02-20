@@ -90,7 +90,9 @@ const NavigationHub = () => {
         <Stack.Screen name="Country Pick" component={CountryScreen} />
         <Stack.Screen name="Time Period" component={TimePeriodScreen} />
         <Stack.Screen name="Story Pick" component={StoryPickScreen} />
-        <Stack.Screen name="Full Story" component={FullStory} />
+        <Stack.Screen name="Full Story" component={FullStory} options={{
+            headerShown: false
+        }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

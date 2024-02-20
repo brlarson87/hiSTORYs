@@ -8,8 +8,9 @@ const TimePeriodScreen = ({ navigation }) => {
     
   return (
     <View style={styles.container}>
+        {/* <Text styles={styles.title}>United States</Text> */}
         <ScrollView contentContainerStyle={styles.scrollView}>
-            <Text styles={styles.title}>United States</Text>
+            
 
             <Pressable style={styles.timePeriod} onPress={() => navigation.push('Story Pick')}>
                 <Text style={styles.timePeriodText}>2000-current</Text>
@@ -56,18 +57,24 @@ const styles = StyleSheet.create({
         padding: 5
     },
     title: {
+        fontFamily: 'Fredoka-Regular',
         marginVertical: 12,
         fontSize: 20
     },
     timePeriod: {
-        borderColor: Colors.primary_gold,
-        borderWidth: 1,
+        backgroundColor: "#FEFCEE",
         borderRadius: 8,
         width: '80%',
         padding: 15,
-        marginVertical: 5
+        marginVertical: 9,
+        shadowColor: '#000',
+        shadowOffset: {width: 1, height: 3},
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        elevation: 10
     },
     timePeriodText: {
+        fontFamily: 'Fredoka-Regular',
         color: Colors.primary_green,
         fontSize: 18
     }

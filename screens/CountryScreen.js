@@ -20,7 +20,7 @@ const CountryScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.textAndIcon}>
                         <Text style={styles.countryText}>United States</Text>
-                        <AntDesign style={{ marginRight: 5}} name="rightcircleo" size={24} color={Colors.primary_green} />
+                        <AntDesign style={{ marginRight: 5}} name="rightcircleo" size={24} color={Colors.primary_gold} />
                     </View>
                 </Pressable>
             </View>
@@ -32,7 +32,7 @@ const CountryScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.textAndIcon}>
                         <Text style={styles.countryText}>Mexico</Text>
-                        <AntDesign style={{ marginRight: 5}} name="rightcircleo" size={24} color={Colors.primary_green} />
+                        <AntDesign style={{ marginRight: 5}} name="rightcircleo" size={24} color={Colors.primary_gold} />
                     </View>
                 </Pressable>
             </View>
@@ -44,7 +44,7 @@ const CountryScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.textAndIcon}>
                         <Text style={styles.countryText}>Canada</Text>
-                        <AntDesign style={{ marginRight: 5}} name="rightcircleo" size={24} color={Colors.primary_green} />
+                        <AntDesign style={{ marginRight: 5}} name="rightcircleo" size={24} color={Colors.primary_gold} />
                     </View>
                 </Pressable>
             </View>
@@ -70,29 +70,31 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
     },
     countryContainer: {
-        borderColor: Colors.primary_gold,
-        borderWidth: 1,
+        // borderColor: Colors.primary_gold,
+        // borderWidth: 1,
         borderRadius: 8,
+        backgroundColor: "#FEFCEE",
         width: '85%',
-        height: 80,
-        marginVertical: 5,
+        height: 60,
+        marginVertical: 9,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         
     },
     textAndIcon: {
-        width: '50%',
+        width: '60%',
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     countryText: {
+        fontFamily: 'Fredoka-Regular',
         color: Colors.primary_green,
         fontSize: 18,
-        marginLeft: 4
+        marginLeft: 8
     },
     imageContainer: {
-        width: '50%',
+        width: '35%',
         height: '100%'
     },
     flagImg: {
