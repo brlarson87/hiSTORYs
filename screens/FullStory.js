@@ -47,10 +47,19 @@ const FullStory = ({ navigation }) => {
         fetchStory();
     }, [])
 
+    let StoryContent;
+
     if(isLoading && !fullStory) {
-        return <View style={{ flex: 1, justifyContent: 'center' }}>
-                <ActivityIndicator size="large" color={Colors.primary_gold} />
-               </View>
+        StoryContent = 
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+            <ActivityIndicator size="large" color={Colors.primary_gold} style={{ marginTop: 40 }}/>
+        </View>
+    } else {
+        StoryContent = fullStory.map((paragraph, index) => (
+            <View style={styles.paragraphContainer} key={index}>
+                <Text style={styles.paragraph}>{paragraph}</Text>
+            </View>
+            ))
     }
 
   return (
@@ -73,11 +82,7 @@ const FullStory = ({ navigation }) => {
         <View style={styles.titleContainer}>
             <Text style={styles.title}>Pearl Harbor Attacks</Text>
         </View>
-        {fullStory.map((paragraph, index) => (
-        <View style={styles.paragraphContainer} key={index}>
-            <Text style={styles.paragraph}>{paragraph}</Text>
-        </View>
-        ))}
+        {StoryContent}
       </ScrollView>
     </View>
     </>
