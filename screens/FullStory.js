@@ -1,5 +1,23 @@
-import { Button, ScrollView, StyleSheet, Text, View, Dimensions, Pressable } from 'react-native'
-import React, { useLayoutEffect, useState } from 'react'
+import { 
+    Button, 
+    ScrollView, 
+    StyleSheet, 
+    Text, 
+    View, 
+    Dimensions, 
+    Pressable,
+    ActivityIndicator } from 'react-native'
+import React, { 
+    useEffect, 
+    useState } from 'react'
+import { app } from '../firebase/firebase'
+import {
+    getFirestore,
+    query,
+    where,
+    getDocs,
+    collection,
+   } from "firebase/firestore";
 import Colors from '../constants/Colors'
 import { AntDesign } from '@expo/vector-icons';
 
@@ -7,6 +25,33 @@ const windowWidth = Dimensions.get('window').width;
 import { story } from '../dummy-data';
 
 const FullStory = ({ navigation }) => {
+    const [storyTitle, setStoryTitle] = useState();
+    //const [description, setDescription] = useState();
+    const [fullStory, setFullStory] = useState();
+    const [isLoading, setIsLoading] = useState(true);
+    const db = getFirestore(app);
+
+    useEffect(() => {
+        const fetchStory = async () => {
+            // const q = query(collection(db, "United-States"), where(db.FieldPath.documentId(), '==', 'BkCCpkfUdrH6iZ2IPXR3'));
+            const q = query(collection(db, "United-States"));
+            const stories = await getDocs(q);
+            stories.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                storyDoc = doc.data();
+                setStoryTitle(storyDoc.title);
+                setFullStory(storyDoc.fullStory)
+              });
+        }
+
+        fetchStory();
+    }, [])
+
+    if(isLoading && !fullStory) {
+        return <View style={{ flex: 1, justifyContent: 'center' }}>
+                <ActivityIndicator size="large" color={Colors.primary_gold} />
+               </View>
+    }
 
   return (
     <>
@@ -15,7 +60,7 @@ const FullStory = ({ navigation }) => {
             <AntDesign name="back" size={28} color={Colors.primary_gold} />
         </Pressable>
        
-        <Text style={[styles.hiddenText, { opacity: 0 }]}>Pearl Harbor Attacks</Text>
+        <Text style={[styles.hiddenText, { opacity: 0 }]}>{storyTitle}</Text>
 
         <Pressable onPress={() => navigation.navigate('Home')}>
             <AntDesign name='home' size={28} color={Colors.primary_gold}/>  
@@ -28,7 +73,7 @@ const FullStory = ({ navigation }) => {
         <View style={styles.titleContainer}>
             <Text style={styles.title}>Pearl Harbor Attacks</Text>
         </View>
-        {story.fullStory.map((paragraph, index) => (
+        {fullStory.map((paragraph, index) => (
         <View style={styles.paragraphContainer} key={index}>
             <Text style={styles.paragraph}>{paragraph}</Text>
         </View>
