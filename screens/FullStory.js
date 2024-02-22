@@ -9,16 +9,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { app } from "../firebase/firebase";
-import {
-  getFirestore,
-  query,
-  where,
-  getDocs,
-  getDoc,
-  doc,
-  collection,
-} from "firebase/firestore";
+
 import Colors from "../constants/Colors";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -30,7 +21,6 @@ import { story } from "../dummy-data";
 const FullStory = ({ navigation, route }) => {
   const [fullStory, setFullStory] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const db = getFirestore(app);
 
   const { storyId, title, collectionName } = route.params;
 

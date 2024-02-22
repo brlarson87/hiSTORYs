@@ -13,8 +13,9 @@ import { AntDesign } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
 
-const StoryPickScreen = ({ navigation }) => {
-  return (
+const StoryPickScreen = ({ navigation, route }) => {
+  // Pull storyID, CollectionName, title, date and description from params
+  TODO: return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <Text styles={styles.title}>United States</Text>
