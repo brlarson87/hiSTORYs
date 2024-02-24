@@ -9,18 +9,34 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  useScrollViewOffset,
+  useAnimatedRef,
+  withTiming,
+} from "react-native-reanimated";
 import Colors from "../constants/Colors";
 import { AntDesign } from "@expo/vector-icons";
-
 import { fetchStoryById } from "../firebase/firebase";
 
 const windowWidth = Dimensions.get("window").width;
-import { story } from "../dummy-data";
 
 const FullStory = ({ navigation, route }) => {
   const [fullStory, setFullStory] = useState();
   const [isLoading, setIsLoading] = useState(true);
+
+  /// ANIMATED
+  const animatedRef = useAnimatedRef();
+  const offset = useScrollViewOffset(animatedRef);
+
+  const animatedTitleStyle = useAnimatedStyle(() => {
+    return {
+      opacity:
+        Math.round(offset.value) > 80 ? Math.round(offset.value) / 150 : 0,
+    };
+  });
+  ///
 
   const { storyId, title, collectionName } = route.params;
 
@@ -56,21 +72,22 @@ const FullStory = ({ navigation, route }) => {
 
   return (
     <>
-      <View style={[styles.opacityHeader]}>
+      <Animated.View style={[styles.opacityHeader]}>
         <Pressable onPress={() => navigation.goBack()}>
           <AntDesign name='back' size={28} color={Colors.primary_gold} />
         </Pressable>
 
-        <Text style={[styles.hiddenText, { opacity: 0 }]}>
-          Pearl Harbor Attacks
-        </Text>
+        <Animated.View style={[animatedTitleStyle]}>
+          <Text style={[styles.hiddenText]}>Pearl Harbor Attacks</Text>
+        </Animated.View>
 
         <Pressable onPress={() => navigation.navigate("Home")}>
           <AntDesign name='home' size={28} color={Colors.primary_gold} />
         </Pressable>
-      </View>
+      </Animated.View>
       <View style={styles.container}>
-        <ScrollView
+        <Animated.ScrollView
+          ref={animatedRef}
           contentContainerStyle={styles.scrollView}
           showsVerticalScrollIndicator={false}
         >
@@ -78,7 +95,7 @@ const FullStory = ({ navigation, route }) => {
             <Text style={styles.title}>{title}</Text>
           </View>
           {StoryContent}
-        </ScrollView>
+        </Animated.ScrollView>
       </View>
     </>
   );
@@ -106,9 +123,9 @@ const styles = StyleSheet.create({
     padding: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
-    // shadowOpacity: 0.2,
-    // shadowRadius: 10,
-    // elevation: 10
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 10,
   },
   hiddenText: {
     fontSize: 18,
